@@ -4,14 +4,15 @@ import { Translate } from 'react-jhipster';
 import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
 import { Paper,Tabs,Tab,TableContainer,Table,TableHead,TableRow,TableCell,TableBody,makeStyles,Button } from '@material-ui/core';
-import{getEntities} from '../../../entities/sales/sales.reducer';
+import{getEntities,updateEntity,} from '../../../entities/sales/sales.reducer';
 import { ISales } from 'app/shared/model/sales.model';
+import {State} from 'app/shared/model/enumerations/state.model'
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
 // export type IShippedProp = StateProps;
 export interface IShippedProp extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 const optionSelected=1
-const stateDescription="SHIPPED"
+const stateDescription=State.SHIPPED
 const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -27,7 +28,11 @@ export const Shipped = (props: IShippedProp) => {
   useEffect(() => {
     props.getEntities();
   }, []);
-    
+  
+  const changeState = (salesEntity:ISales) => {
+    salesEntity.state=State.DELIVERED
+    props.updateEntity(salesEntity)      
+  }
   const { salesList, match, loading } = props;
  
   const classes = useStyles(); 
@@ -64,7 +69,7 @@ export const Shipped = (props: IShippedProp) => {
                   <TableCell align="center">{sales.id}</TableCell>                  
                   <TableCell align="center">{sales.product.name}</TableCell>
                   <TableCell align="center">
-                    <Button variant="contained" color="primary" href="#contained-buttons">Entregado</Button>  
+                    <Button color="primary" onClick={()=>{changeState(sales)}}>Entregar</Button>   
                   </TableCell>
                   </TableRow>          
               ))}
@@ -91,6 +96,7 @@ const mapStateToProps = ({ sales }: IRootState) => ({
 
 const mapDispatchToProps = {
   getEntities,
+  updateEntity,
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
