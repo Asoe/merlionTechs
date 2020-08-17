@@ -20,6 +20,13 @@ import product, {
 import sales, {
   SalesState
 } from 'app/entities/sales/sales.reducer';
+import deliveredSalesForDay, {
+  DeliveredSalesForDayState,
+  TopProductSalesState,
+  topProductSales,
+  topProductProfits,
+  TopProductProfitsState,
+} from 'app/modules/testAnalytics/metrics/metric.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -36,6 +43,9 @@ export interface IRootState {
   readonly product: ProductState;
   readonly sales: SalesState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
+  readonly deliveredSalesForDay: DeliveredSalesForDayState;
+  readonly topProductSales: TopProductSalesState;
+  readonly topProductProfits: TopProductProfitsState;
   readonly loadingBar: any;
 }
 
@@ -53,6 +63,9 @@ const rootReducer = combineReducers<IRootState>({
   product,
   sales,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
+  deliveredSalesForDay,
+  topProductSales,
+  topProductProfits,
   loadingBar,
 });
 
