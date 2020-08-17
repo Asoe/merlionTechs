@@ -5,11 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +29,7 @@ public class MetricResource {
 	
 	private final Logger log = LoggerFactory.getLogger(SalesResource.class);
 
-    private static final String ENTITY_NAME = "sales";
+   
     
     @Value("${jhipster.clientApp.name}")
     private String applicationName;

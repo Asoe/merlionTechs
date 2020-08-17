@@ -148,23 +148,23 @@ export const topProductProfits=(state: TopProductProfitsState = initialStateTopP
 
 export const getDeliveredSalesForDay: ICrudGetAllAction<IDeliveredSalesForDay> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_SALES_DELIVERED_FOR_DAY,
-  payload: axios.get<IDeliveredSalesForDay>(`${URL.FETCH_SALES_DELIVERED_FOR_DAY}`),
+  payload: axios.get<IDeliveredSalesForDay>(`${URL.FETCH_SALES_DELIVERED_FOR_DAY}?cacheBuster=${new Date().getTime()}`),
 });
 
 export const getSalesForDay: ICrudGetAllAction<ISalesForDay> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_SALES_DELIVERED_FOR_DAY,
-  payload: axios.get<ISalesForDay>(`${URL.FETCH_SALES_FOR_DAY}`),
+  payload: axios.get<ISalesForDay>(`${URL.FETCH_SALES_FOR_DAY}?cacheBuster=${new Date().getTime()}`),
 });
 
 
 export const getTopProductSales: ICrudGetAllAction<ITopProductSales> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_TOP_PRODUCT_SALES,
-  payload: axios.get<ITopProductSales>(`${URL.FETCH_TOP_PRODUCT_SALES}`),
+  payload: axios.get<ITopProductSales>(`${URL.FETCH_TOP_PRODUCT_SALES}?cacheBuster=${new Date().getTime()}`),
 });
 
 
 export const getTopProductProfits: ICrudGetAllAction<ITopProductProfits> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_TOP_PRODUCT_PROFITS,
-  payload: axios.get<ITopProductProfits>(`${URL.FETCH_TOP_PRODUCT_PROFITS}`),
+  payload: axios.get<ITopProductProfits>(`${URL.FETCH_TOP_PRODUCT_PROFITS}?cacheBuster=${new Date().getTime()}`),
 });
 
