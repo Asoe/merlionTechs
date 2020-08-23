@@ -1,16 +1,20 @@
 import './testAnalytics.scss';
 
-import React, { PureComponent, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import {Grid,Paper} from '@material-ui/core/';
 import Alert from '@material-ui/lab/Alert';
 import { Translate } from 'react-jhipster';
 import { connect } from 'react-redux';
 import { IRootState } from 'app/shared/reducers';
-import { getDeliveredSalesForDay ,getTopProductSales,getTopProductProfits} from './metrics/metric.reducer'
+import { getTopProductSales} from './metrics/top-product-sales/top-product-sales.reducer'
+import { getDeliveredSalesForDay } from './metrics/sales-delivered/sales-delivered.reducer'
+import { getSalesForDay } from './metrics/sales-for-day/sales-for-day.reducer'
+import { getTopProductProfits } from './metrics/top-product-profits/top-product-profits.reducer'
 import {RenderDeliveredSales} from './metrics/sales-delivered/sales-delivered'
 import { RenderTopProductSales } from './metrics/top-product-sales/top-product-sales';
 import { RenderTopProductProfits} from './metrics/top-product-profits/top-product-profits';
+import { SalesForDay } from './metrics/sales-for-day/sales-for-day';
 export interface ITestAnalyticsProp extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 export const TestAnalytics = (props: ITestAnalyticsProp) => {
   
@@ -19,9 +23,10 @@ export const TestAnalytics = (props: ITestAnalyticsProp) => {
       props.getDeliveredSalesForDay();
       props.getTopProductSales();
       props.getTopProductProfits();
+      props.getSalesForDay();
     }, []);
   } 
-  const { deliveredSalesList, account,topProductSalesList,topProductProfitsList} = props;
+  const { deliveredSalesList, account,topProductSalesList,topProductProfitsList,salesForDayList} = props;
   
   return (
     <Paper>
@@ -45,7 +50,7 @@ export const TestAnalytics = (props: ITestAnalyticsProp) => {
             <Paper  ><RenderTopProductProfits topProductProfitList={topProductProfitsList}/></Paper>
             </Grid>
             <Grid className="paper" justify="center" alignItems="center" container item xs >
-              <Paper ><RenderDeliveredSales deliveredSalesList={deliveredSalesList}/></Paper>
+              <Paper ><SalesForDay salesForDayList={salesForDayList}/></Paper>
             </Grid>
           </Grid>
           </div>               
@@ -75,18 +80,20 @@ export const TestAnalytics = (props: ITestAnalyticsProp) => {
 };
 
 
-const mapStateToProps = ({ deliveredSalesForDay,authentication,topProductSales,topProductProfits }: IRootState) => ({
+const mapStateToProps = ({ deliveredSalesForDay,authentication,topProductSales,topProductProfits,salesForDay }: IRootState) => ({
   account: authentication.account,
   isAuthenticated: authentication.isAuthenticated,
   deliveredSalesList: deliveredSalesForDay.entities,  
   topProductSalesList:topProductSales.entities,
-  topProductProfitsList:topProductProfits.entities
+  topProductProfitsList:topProductProfits.entities,
+  salesForDayList: salesForDay.entities,
 });
 
 const mapDispatchToProps = {
   getDeliveredSalesForDay,
   getTopProductSales,
   getTopProductProfits,
+  getSalesForDay,
 };
 
 

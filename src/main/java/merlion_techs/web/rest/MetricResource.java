@@ -60,23 +60,23 @@ public class MetricResource {
     }
     
     @GetMapping("/salesForDay")
-    public Map<LocalDate,List<Sales>> getSalesOnDay() {
-    	Map<LocalDate,List<Sales>> salesOnDay= new HashMap<LocalDate,List<Sales>>();
+    public List<SalesOnDay> getSalesOnDay() {
+    	Map<LocalDate,Integer> salesOnDay= new HashMap<LocalDate,Integer>();
         log.debug("REST request to get all Sales for day");
         List<Sales> sales= salesRepository.findAll();
         
         sales.forEach((sale)->{        	
     		LocalDate key=sale.getDate();
     		if(salesOnDay.containsKey(key)) {
-    			salesOnDay.get(key).add(sale);    			
+    			salesOnDay.put(key, salesOnDay.get(key)+1);    			
     		}else {
-    			ArrayList<Sales> list= new ArrayList<Sales>();
-    			list.add(sale);
-    			salesOnDay.put(key,list );
+    			salesOnDay.put(key, 1);
     		}     		
         	
-        });   
-        return salesOnDay;
+		});
+		List<SalesOnDay> listSalesOnDay= new ArrayList<SalesOnDay>();
+        salesOnDay.forEach((date,i)->listSalesOnDay.add(new SalesOnDay(date,i)));   
+        return listSalesOnDay;
     }
     
     
@@ -86,13 +86,15 @@ public class MetricResource {
     	Map<Product,Integer> productTotalSales = new HashMap<Product, Integer>();
     	
     	salesRepository.findAll().forEach((sale)->{
-    		Product key=sale.getProduct();
-    		if(productTotalSales.containsKey(key)) {
-    			productTotalSales.put(key, productTotalSales.get(key)+1);    			
-    		}
-    		else {
-    			productTotalSales.put(key,1);    			
-    		}
+			Product key=sale.getProduct();
+			if(key!=null){
+				if(productTotalSales.containsKey(key)) {
+					productTotalSales.put(key, productTotalSales.get(key)+1);    			
+				}
+				else {
+					productTotalSales.put(key,1);    			
+				}
+			}    		
     	});     	
     	
     	List<ProductMetric> listTopFiveProductSales= new ArrayList<ProductMetric>();
@@ -117,13 +119,15 @@ public class MetricResource {
     	
 		Map<Product,BigDecimal> productTotalPrice = new HashMap<Product, BigDecimal>();
     	salesRepository.findAll().forEach((sale)->{
-    		Product key=sale.getProduct();
-    		if(productTotalPrice.containsKey(key)) {    			
-    			productTotalPrice.put(key,productTotalPrice.get(key).add(key.getPrice()));
-    		}
-    		else {    			
-    			productTotalPrice.put(key, key.getPrice());
-    		}
+			Product key=sale.getProduct();
+			if(key!=null){
+				if(productTotalPrice.containsKey(key)) {    			
+					productTotalPrice.put(key,productTotalPrice.get(key).add(key.getPrice()));
+				}
+				else {    			
+					productTotalPrice.put(key, key.getPrice());
+				}
+			}    		
     	}); 
     	
     	List<ProductMetric> listTopFiveProductSales= new ArrayList<ProductMetric>();
