@@ -45,13 +45,14 @@ public class MetricResource {
         
         sales.forEach((sale)->{
         	if(sale.getState()==State.DELIVERED) {
-        		LocalDate key=sale.getDate();
-        		if(salesDeliveredOnDay.containsKey(key)) {
-        			salesDeliveredOnDay.put(key, salesDeliveredOnDay.get(key)+1);
-        		}else {
-        			salesDeliveredOnDay.put(key, 1);
-        		}
-        		
+				LocalDate key=sale.getDate();
+				if(key!=null){
+					if(salesDeliveredOnDay.containsKey(key)) {
+						salesDeliveredOnDay.put(key, salesDeliveredOnDay.get(key)+1);
+					}else {
+						salesDeliveredOnDay.put(key, 1);
+					}
+				}
         	}
         });
         List<SalesOnDay> listSalesDeliveredOnDay= new ArrayList<SalesOnDay>();
@@ -66,12 +67,14 @@ public class MetricResource {
         List<Sales> sales= salesRepository.findAll();
         
         sales.forEach((sale)->{        	
-    		LocalDate key=sale.getDate();
-    		if(salesOnDay.containsKey(key)) {
-    			salesOnDay.put(key, salesOnDay.get(key)+1);    			
-    		}else {
-    			salesOnDay.put(key, 1);
-    		}     		
+			LocalDate key=sale.getDate();
+			if(key!=null){
+				if(salesOnDay.containsKey(key)) {
+					salesOnDay.put(key, salesOnDay.get(key)+1);    			
+				}else {
+					salesOnDay.put(key, 1);
+				}
+			}   		     		
         	
 		});
 		List<SalesOnDay> listSalesOnDay= new ArrayList<SalesOnDay>();
