@@ -5,14 +5,8 @@ import { Translate } from 'react-jhipster';
 import { Col, Row } from 'reactstrap';
 
 const Footer = props => (
-  <div className="footer page-content">
-    <Row>
-      <Col md="12">
-        <p>
-          <Translate contentKey="footer">Your footer</Translate>
-        </p>
-      </Col>
-    </Row>
+  <div className="footer ">   
+         <div>All rights reserved © 2020 Merlion Techs</div> 
   </div>
 );
 
