@@ -1,5 +1,5 @@
 
-import axios ,{ AxiosPromise} from 'axios';
+import axios, { AxiosPromise } from 'axios';
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
@@ -100,57 +100,57 @@ const apiUrl = 'api/testAnalyticsBonus/products';
 
 
 
-export const getEntitiesProductTest:ICrudGetAllAction<IProduct>= (userId,page, size, sort)=>{
-    const axiosConfig = {
-        headers: {
-            'id-user': userId,
-        }
-      };
-      const action={
-        type: ACTION_TYPES.FETCH_PRODUCT_LIST,
-        payload: axios.get<IProduct>(`${apiUrl}?cacheBuster=${new Date().getTime()}`,axiosConfig),
-      } ;
-      return action;
-      
-}; 
-
-export const getEntityProductTest:ICrudGetAction<IProduct>= (userId,id) => {
-  const requestUrl = `${apiUrl}/${id}`;
-   const axiosConfig = {
-        headers: {
-            'id-user': userId,
-        }
-      };
-      const action={
-        type: ACTION_TYPES.FETCH_PRODUCT,
-        payload:  axios.get<IProduct>(requestUrl,axiosConfig),
-      } ;
-      return action; 
-};
-
-export const createEntityProductTest :ICrudPutAction<IProduct>= (userId,entity)=> async dispatch => {
+export const getEntitiesProductTest: ICrudGetAllAction<IProduct> = (userId, page, size, sort) => {
   const axiosConfig = {
     headers: {
-        'id-user': userId,
+      'id-user': userId,
+    }
+  };
+  const action = {
+    type: ACTION_TYPES.FETCH_PRODUCT_LIST,
+    payload: axios.get<IProduct>(`${apiUrl}?cacheBuster=${new Date().getTime()}`, axiosConfig),
+  };
+  return action;
+
+};
+
+export const getEntityProductTest: ICrudGetAction<IProduct> = (userId, id) => {
+  const requestUrl = `${apiUrl}/${id}`;
+  const axiosConfig = {
+    headers: {
+      'id-user': userId,
+    }
+  };
+  const action = {
+    type: ACTION_TYPES.FETCH_PRODUCT,
+    payload: axios.get<IProduct>(requestUrl, axiosConfig),
+  };
+  return action;
+};
+
+export const createEntityProductTest: ICrudPutAction<IProduct> = (userId, entity) => async dispatch => {
+  const axiosConfig = {
+    headers: {
+      'id-user': userId,
     }
   };
   const result = await dispatch({
     type: ACTION_TYPES.CREATE_PRODUCT,
-    payload: axios.post(apiUrl, cleanEntity(entity),axiosConfig),
+    payload: axios.post(apiUrl, cleanEntity(entity), axiosConfig),
   });
   dispatch(getEntitiesProductTest(userId));
   return result;
 };
 
-export const updateEntityProductTest :ICrudPutAction<IProduct> = (userId,entity) => async dispatch => {
+export const updateEntityProductTest: ICrudPutAction<IProduct> = (userId, entity) => async dispatch => {
   const axiosConfig = {
     headers: {
-        'id-user': userId,
+      'id-user': userId,
     }
   };
   const result = await dispatch({
     type: ACTION_TYPES.UPDATE_PRODUCT,
-    payload: axios.put(apiUrl, cleanEntity(entity),axiosConfig),
+    payload: axios.put(apiUrl, cleanEntity(entity), axiosConfig),
   });
   return result;
 };
@@ -161,11 +161,11 @@ export const resetProductTest = () => ({
 
 
 export interface IPayload<T> {
-    type: string;
-    payload: AxiosPromise<T>;
-    meta?: any;
+  type: string;
+  payload: AxiosPromise<T>;
+  meta?: any;
 }
 export declare type IPayloadResult<T> = ((dispatch: any, getState?: any) => IPayload<T> | Promise<IPayload<T>>);
-export declare type ICrudGetAction<T> = (userId:string,id: string | number) => IPayload<T> | ((dispatch: any) => IPayload<T>);
-export declare type ICrudGetAllAction<T> = (userId:string,page?: number, size?: number, sort?: string) => IPayload<T> | ((dispatch: any) => IPayload<T>);
-export declare type ICrudPutAction<T> = (userId:string,data?: T) => IPayload<T> | IPayloadResult<T>;
+export declare type ICrudGetAction<T> = (userId: string, id: string | number) => IPayload<T> | ((dispatch: any) => IPayload<T>);
+export declare type ICrudGetAllAction<T> = (userId: string, page?: number, size?: number, sort?: string) => IPayload<T> | ((dispatch: any) => IPayload<T>);
+export declare type ICrudPutAction<T> = (userId: string, data?: T) => IPayload<T> | IPayloadResult<T>;
