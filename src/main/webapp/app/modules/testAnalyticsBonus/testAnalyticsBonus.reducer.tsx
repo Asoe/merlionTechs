@@ -1,12 +1,12 @@
 
 export const ACTION_TYPES = {
-  SET_USER_ID:'SET_USER_ID',
-  GET_USER_ID:'GET_USER_ID', 
- 
+  SET_USER_ID: 'SET_USER_ID',
+  GET_USER_ID: 'GET_USER_ID',
+
 };
 
 const initialState = {
-    userId:"0",
+  userId: "0",
 };
 
 export type TestAnalyticsState = Readonly<typeof initialState>;
@@ -15,11 +15,11 @@ export type TestAnalyticsState = Readonly<typeof initialState>;
 
 export default (state: TestAnalyticsState = initialState, action): TestAnalyticsState => {
   switch (action.type) {
-    case ACTION_TYPES.SET_USER_ID:   
+    case ACTION_TYPES.SET_USER_ID:
       return {
         ...state,
         userId: action.payload.userId,
-      };    
+      };
     default:
       return state;
   }
@@ -27,12 +27,12 @@ export default (state: TestAnalyticsState = initialState, action): TestAnalytics
 
 // Actions
 
-export const setUserId = (payload) =>({
-    type:ACTION_TYPES.SET_USER_ID,
-    payload,
+export const setUserId = (payload) => ({
+  type: ACTION_TYPES.SET_USER_ID,
+  payload,
 });
 
-export const getUserId=(payload) =>({
-    type:ACTION_TYPES.GET_USER_ID,
-    payload,
+export const getUserId = (payload) => ({
+  type: ACTION_TYPES.GET_USER_ID,
+  payload,
 })
