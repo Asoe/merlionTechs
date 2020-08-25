@@ -1,0 +1,28 @@
+/* ==========================================================================
+Main page styles
+========================================================================== */
+.hipster {
+  display: inline-block;
+  width: 100%;
+  height: 497px;
+  background: url('../../../content/images/jhipster_family_member_2.svg') no-repeat center top;
+  background-size: contain;
+}
+
+.fontMerlion {
+  color: #266ba0;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.paper {
+  background-color: #266ba0;
+  color: #266ba0;
+}
+.gridFirst {
+  padding: 50px 50px 10px 50px;
+}
+
+.gridLast {
+  padding: 00px 50px 50px 50px;
+}

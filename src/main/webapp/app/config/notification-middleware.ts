@@ -53,6 +53,9 @@ export default () => next => action => {
               break;
 
             case 400: {
+              if (data.message === 'USER_ID_WITHOUT_PERMISSIONS') {
+                break;
+              }
               const headers = Object.entries<string>(response.headers);
               let errorHeader: string | null = null;
               let entityKey: string | null = null;

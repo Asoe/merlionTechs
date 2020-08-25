@@ -24,6 +24,7 @@ import userWithPerms, {
 import permissions, {
   PermissionsState
 } from 'app/entities/permissions/permissions.reducer';
+import testAnalytics, { TestAnalyticsState } from 'app/modules/testAnalyticsBonus/testAnalyticsBonus.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -40,6 +41,7 @@ export interface IRootState {
   readonly product: ProductState;
   readonly userWithPerms: UserWithPermsState;
   readonly permissions: PermissionsState;
+  readonly testAnalytics: TestAnalyticsState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -58,6 +60,7 @@ const rootReducer = combineReducers<IRootState>({
   product,
   userWithPerms,
   permissions,
+  testAnalytics,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

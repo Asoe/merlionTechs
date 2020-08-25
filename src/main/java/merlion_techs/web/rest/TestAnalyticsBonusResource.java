@@ -74,8 +74,7 @@ public class TestAnalyticsBonusResource {
     	}  		
     	else {
     		log.debug("FAILED REST request to save Product. Permission denied");
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN, "Permission denied for this user");    		
+            throw new BadRequestAlertException("Permission denied for this user", "", "USER_ID_WITHOUT_PERMISSIONS");    		
     	}
     	
     	
@@ -110,8 +109,7 @@ public class TestAnalyticsBonusResource {
     	}  		
     	else {
     		log.debug("FAILED REST request to update Product. Permission denied");
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN, "Permission denied for this user");    		
+            throw new BadRequestAlertException("Permission denied for this user", "", "USER_ID_WITHOUT_PERMISSIONS");    		
     	}
     	
     	
@@ -137,8 +135,7 @@ public class TestAnalyticsBonusResource {
     	}  		
     	else {
     		log.debug("FAILED REST request to get all Products. Permission denied");
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN, "Permission denied for this user");    		
+            throw new BadRequestAlertException("This user has not permissions for list products", "", "USER_ID_WITHOUT_PERMISSIONS");    		
     	}
     	
         
@@ -165,8 +162,7 @@ public class TestAnalyticsBonusResource {
     	}  		
     	else {
     		log.debug("FAILED REST request to get Product. Permission denied");
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN, "Permission denied for this user");    		
+            throw new BadRequestAlertException("Permission denied for this user", "", "USER_ID_WITHOUT_PERMISSIONS");    		
     	}
     	
         
