@@ -46,7 +46,7 @@ public class MetricResource {
         sales.forEach((sale)->{
         	if(sale.getState()==State.DELIVERED) {
 				LocalDate key=sale.getDate();
-				if(key!=null){
+				if(key!=null && sale.getProduct()!=null){
 					if(salesDeliveredOnDay.containsKey(key)) {
 						salesDeliveredOnDay.put(key, salesDeliveredOnDay.get(key)+1);
 					}else {
@@ -68,7 +68,7 @@ public class MetricResource {
         
         sales.forEach((sale)->{        	
 			LocalDate key=sale.getDate();
-			if(key!=null){
+			if(key!=null&&sale.getProduct()!=null){
 				if(salesOnDay.containsKey(key)) {
 					salesOnDay.put(key, salesOnDay.get(key)+1);    			
 				}else {
